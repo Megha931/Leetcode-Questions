@@ -1,7 +1,6 @@
 
 // using two empty arrays(prefix & suffix)
 
-
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
