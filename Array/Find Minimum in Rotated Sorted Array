@@ -1,1 +1,50 @@
+// Using linear Iteration
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int n=nums.size();
+        int mini=INT_MAX;
+        for(int i=0; i< n; i++){
+            mini=min(mini, nums[i]);
+        }
+
+        return mini;
+        
+    }
+};
+
+// Using Binary Search
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+        int mini = nums[0];
+
+        while (left <= right) {
+          
+            int mid = left + (right - left) / 2;
+
+             if(nums[left]<=nums[right]){
+                mini=min(mini, nums[left]);
+                break;
+            }
+
+          
+            if (nums[mid] >= nums[left]) {
+             
+                mini = min(mini, nums[left]);
+                left = mid + 1;
+            } else {
+               
+                mini = min(mini, nums[mid]);
+                right = mid - 1;
+            }
+        }
+
+        return mini;
+    }
+};
+
 
