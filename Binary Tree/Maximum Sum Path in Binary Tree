@@ -1,0 +1,36 @@
+Maximum Sum Path in Binary Tree
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    
+    int maxSumOfPath(TreeNode* root, int& maxi){
+        if(root==NULL) return 0;
+
+        int leftMaxSum = max(0, maxSumOfPath(root->left, maxi));
+        int rightMaxSum = max(0, maxSumOfPath(root->right, maxi));
+
+        maxi = max(maxi, leftMaxSum+root->val+ rightMaxSum);
+
+        return root->val + max(leftMaxSum,  rightMaxSum);
+    }
+
+    
+    int maxPathSum(TreeNode* root) {
+        int maxi = INT_MIN;
+        maxSumOfPath(root, maxi);
+
+        return maxi;
+    }
+};
