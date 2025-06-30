@@ -1,0 +1,62 @@
+Brute Force
+
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<vector<int>> ans;
+
+        if (root == nullptr) return {};  
+
+        queue<TreeNode*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            int level_size = q.size();
+            vector<int> level;
+
+            for (int i = 0; i < level_size; i++) {
+                TreeNode* top = q.front();
+                q.pop();
+
+                level.push_back(top->val);
+
+                if (top->left != nullptr) q.push(top->left);
+                if (top->right != nullptr) q.push(top->right);
+            }
+            ans.push_back(level);
+        }
+        
+        vector<int> result;
+        for (auto& res : ans) {
+            result.push_back(res.back());
+        }
+        return result;
+    }
+};
+
+
+
+Optimized Solution
+
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root){
+        vector<int> ans;
+        rightView(root, 0, ans);
+        return ans;
+    }
+
+    void rightView(TreeNode* root, int level, vector<int>& ans) {
+        if(root == nullptr) {
+            return;
+        }
+
+        if(ans.size() == level) {
+            ans.push_back(root->val);
+        }
+
+        rightView(root->right, level + 1, ans);
+        rightView(root->left, level + 1, ans);
+    }
+};
+
