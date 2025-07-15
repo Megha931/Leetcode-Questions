@@ -1,5 +1,6 @@
-Merge Overlapping Sub-intervals
+Merge Overlapping Sub-intervals 
 
+Approach
 
 class Solution {
 public:
