@@ -1,0 +1,21 @@
+Minimum consecutive cards to pick up
+
+
+Brute Force
+
+ int minimumCardPickup(vector<int>& cards) {
+
+       int n = cards.size();
+        int mini = INT_MAX;
+        
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
+                if(cards[j] == cards[i]) {
+                    mini = min(mini, j - i + 1);
+                    break; 
+                }
+            }
+        }
+
+        return (mini == INT_MAX) ? -1 : mini;
+}
