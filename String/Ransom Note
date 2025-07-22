@@ -1,0 +1,30 @@
+Ransom Note
+
+
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int freqR[26] = {0};  
+        int freqM[26] = {0};  
+
+       
+        for (char ch : magazine) {
+            freqM[ch - 'a']++;
+        }
+
+        
+        for (char ch : ransomNote) {
+            freqR[ch - 'a']++;
+        }
+
+       
+        for (int i = 0; i < 26; i++) {
+            if (freqR[i] > freqM[i]) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+};
