@@ -1,0 +1,38 @@
+Longest substring with k unique characters
+
+Brute Force
+
+class Solution {
+  public:
+    int longestKSubstr(string &s, int k) {
+    int ans = -1;  
+    
+    
+    unordered_set<char> st;  
+
+
+    for (int i = 0; i < s.size(); i++) {
+        
+        
+        st.clear();  
+
+        
+        for (int j = i; j < s.size(); j++) {
+            st.insert(s[j]); 
+
+           
+            if (st.size() == k) {
+                ans = max(ans, j - i + 1);
+            }
+    
+            if(st.size() > k) break;
+        }
+    }
+
+    return ans;
+        
+    }
+};
+
+
+
