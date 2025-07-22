@@ -1,0 +1,26 @@
+Isomorphic String
+
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        map<char, char> check;
+        map<char, char> reverse_check;
+
+        for(int i = 0; i < s.length(); i++) {
+            if(check.find(s[i]) != check.end()) {
+                if(check[s[i]] != t[i])
+                    return false;
+            } else {
+               
+                if(reverse_check.find(t[i]) != reverse_check.end())
+                    return false;
+                
+                check[s[i]] = t[i];
+                reverse_check[t[i]] = s[i];
+            }
+        }
+        return true;
+    }
+};
+
+
