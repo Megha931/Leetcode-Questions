@@ -34,5 +34,38 @@ class Solution {
     }
 };
 
+Better Solution
+
+class Solution {
+  public:
+    int longestKSubstr(string &s, int k) {
+       
+       int l=0, r=0;
+       map<char, int> check;
+       int maxLen=-1;
+       
+       while(r<s.length()){
+           
+           check[s[r]]++;
+           
+           while(check.size()>k){
+               check[s[l]]--;
+               if (check[s[l]] == 0) check.erase(s[l]);
+               l=l+1;
+               
+           }
+           
+           if(check.size()==k){
+               maxLen= max(maxLen, r-l+1);
+           }
+           
+           r=r+1;
+           
+       }
+        return maxLen;
+    }
+};
+
+
 
 
