@@ -1,0 +1,37 @@
+Subset sum equal to target K 
+
+bool subsetSumUtil(int ind, int target, vector<int>& A, vector<vector<int>>& dp) {
+   
+    if (target == 0)
+        return true;
+
+   
+    if (ind == 0)
+        return A[0] == target;
+
+  
+    if (dp[ind][target] != -1)
+        return dp[ind][target];
+
+  
+    bool notTaken = subsetSumUtil(ind - 1, target, A, dp);
+
+    bool taken = false;
+    if (A[ind] <= target)
+        taken = subsetSumUtil(ind - 1, target - A[ind], A, dp);
+
+   
+    return dp[ind][target] = notTaken || taken;
+}
+
+
+bool hasValidSubset(vector<int> &A, int target) {
+	
+	int n= A.size();
+	
+	
+	vector<vector<int>>dp(n,vector<int>(target+1, -1));
+
+    return subsetSumUtil(n - 1, target, A, dp);
+    
+}
