@@ -1,1 +1,30 @@
 Shortest Palindrome
+
+
+class Solution {
+public:
+    string shortestPalindrome(string s) {
+        const int kBase = 131;
+        unsigned long long prefixHash = 0;
+        unsigned long long suffixHash = 0;
+        unsigned long long currentMultiplier = 1;
+        int palindromeEndIndex = 0;
+        int n = s.size();
+
+        for (int i = 0; i < n; ++i) {
+            int charValue = s[i] - 'a' + 1;
+            prefixHash = prefixHash * kBase + charValue;
+            suffixHash = suffixHash + currentMultiplier * charValue;
+            currentMultiplier *= kBase;
+            if (prefixHash == suffixHash) {
+                palindromeEndIndex = i + 1;
+            }
+        }
+
+        if (palindromeEndIndex == n) return s;
+
+        string remainingSubstring = s.substr(palindromeEndIndex, n - palindromeEndIndex);
+        reverse(remainingSubstring.begin(), remainingSubstring.end());
+        return remainingSubstring + s;
+    }
+};
